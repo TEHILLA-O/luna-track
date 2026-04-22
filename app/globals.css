@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --void: #07060f;
+  --void-mid: #0e0c18;
+  --foreground: #ece8ff;
+  --muted: #8a849e;
+  --accent: #c4b5fd;
+  --accent-foreground: #120b24;
+  --glow: rgba(168, 148, 255, 0.45);
+  --moon-base: #e6e0d4;
+  --moon-highlight: #fffaf0;
+  --moon-edge: #c9c0b4;
+  --moon-shadow: #151322;
+  --moon-ring: rgba(255, 255, 255, 0.35);
+  --moon-aura: rgba(200, 190, 255, 0.35);
+}
+
+body {
+  min-height: 100vh;
+  color: var(--foreground);
+  background: radial-gradient(
+      1200px 800px at 15% -10%,
+      rgba(120, 90, 200, 0.22),
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 600px at 100% 20%,
+      rgba(60, 120, 180, 0.18),
+      transparent 50%
+    ),
+    linear-gradient(165deg, var(--void) 0%, var(--void-mid) 45%, #0a0814 100%);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.starfield {
+  background-image: radial-gradient(1px 1px at 20px 30px, white, transparent),
+    radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 50px 160px, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1px 1px at 160px 120px, white, transparent);
+  background-size: 200px 200px;
+  opacity: 0.35;
+  mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+}
