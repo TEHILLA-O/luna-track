@@ -17,40 +17,41 @@ export function TodayMoon({ now = new Date() }: TodayMoonProps) {
   });
 
   return (
-    <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_0_60px_-20px_var(--glow)] backdrop-blur-md">
-      <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-        Tonight&apos;s moon
-      </p>
-      <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <MoonGlyph
-          fraction={info.illumination}
-          waxing={info.waxing}
-          size={160}
-          className="drop-shadow-[0_0_24px_rgba(200,210,255,0.25)]"
-        />
-        <div className="w-full max-w-sm space-y-3 text-sm sm:text-right">
-          <h2 className="font-serif text-2xl text-[var(--foreground)] sm:text-3xl">
+    <section className="luna-card">
+      <p className="luna-overline">Tonight</p>
+      <div className="mt-5 flex flex-col items-center gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
+        <div className="flex shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--accent-soft)] p-6 sm:p-7">
+          <MoonGlyph
+            fraction={info.illumination}
+            waxing={info.waxing}
+            size={152}
+            className="drop-shadow-[0_0_20px_rgba(200,190,255,0.2)]"
+          />
+        </div>
+        <div className="w-full max-w-sm space-y-4 text-center sm:text-left">
+          <h2 className="font-serif text-[1.65rem] leading-snug text-[var(--foreground)] sm:text-3xl">
             {info.phaseName}
           </h2>
-          <p className="text-[var(--muted)]">
-            Illumination{" "}
+          <p className="text-[15px] text-[var(--muted)]">
             <span className="tabular-nums text-[var(--foreground)]">
               {(info.illumination * 100).toFixed(1)}%
-            </span>
-            <span className="mx-2 text-white/20">·</span>
-            {info.waxing ? "Waxing" : "Waning"}
+            </span>{" "}
+            lit · {info.waxing ? "waxing" : "waning"}
           </p>
-          <div className="rounded-xl border border-white/5 bg-black/20 px-3 py-2 text-left text-[var(--muted)]">
-            <p className="text-[10px] uppercase tracking-wider text-white/35">
-              Moonrise / set (sample: NYC)
+          <div className="rounded-2xl border border-[var(--border)] bg-black/15 px-4 py-3 text-left text-[14px] text-[var(--muted)]">
+            <p className="luna-overline mb-1 text-[10px] uppercase tracking-[0.12em] text-[var(--muted-2)]">
+              Moonrise · Moonset
             </p>
+            <p className="text-[11px] text-[var(--muted-2)]">Sample location: New York</p>
             {times.note ? (
-              <p className="mt-1 text-[var(--foreground)]">{times.note}</p>
+              <p className="mt-2 text-[var(--foreground)]">{times.note}</p>
             ) : (
-              <p className="mt-1 tabular-nums text-[var(--foreground)]">
-                {times.rise ? tf.format(times.rise) : "—"} rise
-                <span className="mx-2 text-white/25">·</span>
-                {times.set ? tf.format(times.set) : "—"} set
+              <p className="mt-2 text-[15px] tabular-nums text-[var(--foreground)]">
+                <span className="text-[var(--muted-2)]">Rise</span>{" "}
+                {times.rise ? tf.format(times.rise) : "—"}
+                <span className="mx-2.5 text-white/15">·</span>
+                <span className="text-[var(--muted-2)]">Set</span>{" "}
+                {times.set ? tf.format(times.set) : "—"}
               </p>
             )}
           </div>

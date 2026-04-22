@@ -53,43 +53,43 @@ export function SkyJournal() {
   }, [draft]);
 
   return (
-    <section className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur-md">
-      <h2 className="font-serif text-xl text-[var(--foreground)]">Night-sky notes</h2>
-      <p className="mt-1 text-xs text-[var(--muted)]">
-        Kept only in this browser — clouds, seeing, constellations, or whatever you noticed.
+    <section className="luna-card-quiet">
+      <h2 className="font-serif text-xl text-[var(--foreground)]">Sky notes</h2>
+      <p className="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">
+        Saved only on this device — a few words about the sky tonight.
       </p>
-      <label className="mt-4 block text-xs uppercase tracking-wider text-[var(--muted)]">
-        New note
+      <label className="mt-5 block">
+        <span className="luna-overline">Write</span>
         <textarea
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           rows={3}
-          className="mt-2 w-full resize-y rounded-xl border border-white/10 bg-black/30 px-3 py-2 text-sm text-[var(--foreground)] outline-none ring-[var(--accent)]/40 placeholder:text-white/25 focus:ring-2"
-          placeholder="Thin cirrus, Jupiter above the roofline…"
+          className="luna-input resize-y"
+          placeholder="Wispy clouds, bright Venus…"
         />
       </label>
-      <button
-        type="button"
-        onClick={add}
-        className="mt-3 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-medium text-[var(--accent-foreground)] transition hover:brightness-110"
-      >
-        Save to journal
+      <button type="button" onClick={add} className="luna-btn-primary mt-3 w-full sm:w-auto">
+        Save note
       </button>
-      <ul className="mt-6 max-h-72 space-y-3 overflow-y-auto pr-1 text-sm">
+      <ul className="mt-6 max-h-64 space-y-2.5 overflow-y-auto pr-1 text-[14px]">
         {!mounted ? (
-          <li className="text-[var(--muted)]">Loading…</li>
+          <li className="text-[var(--muted)]">…</li>
         ) : entries.length === 0 ? (
-          <li className="text-[var(--muted)]">No entries yet.</li>
+          <li className="rounded-2xl border border-dashed border-[var(--border)] py-8 text-center text-[13px] text-[var(--muted-2)]">
+            Nothing here yet. Your first note goes above.
+          </li>
         ) : (
           entries.map((e) => (
-            <li
-              key={e.id}
-              className="rounded-xl border border-white/5 bg-black/25 px-3 py-2"
-            >
-              <time className="text-[10px] uppercase tracking-wider text-white/35">
-                {new Date(e.at).toLocaleString()}
+            <li key={e.id} className="luna-list-row">
+              <time className="text-[10px] font-medium uppercase tracking-[0.14em] text-[var(--muted-2)]">
+                {new Date(e.at).toLocaleString(undefined, {
+                  dateStyle: "medium",
+                  timeStyle: "short",
+                })}
               </time>
-              <p className="mt-1 whitespace-pre-wrap text-[var(--foreground)]">{e.body}</p>
+              <p className="mt-1.5 whitespace-pre-wrap leading-relaxed text-[var(--foreground)]">
+                {e.body}
+              </p>
             </li>
           ))
         )}

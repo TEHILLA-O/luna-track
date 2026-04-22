@@ -3,46 +3,128 @@
 @tailwind utilities;
 
 :root {
-  --void: #07060f;
-  --void-mid: #0e0c18;
-  --foreground: #ece8ff;
-  --muted: #8a849e;
-  --accent: #c4b5fd;
-  --accent-foreground: #120b24;
-  --glow: rgba(168, 148, 255, 0.45);
-  --moon-base: #e6e0d4;
-  --moon-highlight: #fffaf0;
-  --moon-edge: #c9c0b4;
-  --moon-shadow: #151322;
-  --moon-ring: rgba(255, 255, 255, 0.35);
-  --moon-aura: rgba(200, 190, 255, 0.35);
+  /* Soft night — minimal, a little warm */
+  --canvas: #0b0a10;
+  --canvas-mid: #12101a;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-raised: rgba(255, 255, 255, 0.055);
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.11);
+  --foreground: #f4f1fb;
+  --muted: #9c95ad;
+  --muted-2: #6f677d;
+  --accent: #c9b8f3;
+  --accent-soft: rgba(201, 184, 243, 0.14);
+  --accent-foreground: #1a1428;
+  --ring: rgba(201, 184, 243, 0.45);
+  --moon-base: #ebe4d8;
+  --moon-highlight: #fffbf4;
+  --moon-edge: #cfc5b8;
+  --moon-shadow: #1c1a26;
+  --moon-ring: rgba(255, 255, 255, 0.28);
+  --moon-aura: rgba(210, 200, 255, 0.22);
+}
+
+@layer base {
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--foreground);
+  }
 }
 
 body {
   min-height: 100vh;
   color: var(--foreground);
-  background: radial-gradient(
-      1200px 800px at 15% -10%,
-      rgba(120, 90, 200, 0.22),
-      transparent 55%
+  background-color: var(--canvas);
+  background-image: radial-gradient(
+      900px 520px at 12% -8%,
+      rgba(150, 120, 220, 0.12),
+      transparent 58%
     ),
     radial-gradient(
-      900px 600px at 100% 20%,
-      rgba(60, 120, 180, 0.18),
-      transparent 50%
+      700px 480px at 92% 8%,
+      rgba(100, 150, 200, 0.08),
+      transparent 55%
     ),
-    linear-gradient(165deg, var(--void) 0%, var(--void-mid) 45%, #0a0814 100%);
+    linear-gradient(180deg, var(--canvas) 0%, var(--canvas-mid) 55%, #0e0c14 100%);
   font-family: var(--font-body), system-ui, sans-serif;
+  letter-spacing: 0.01em;
 }
 
 .starfield {
-  background-image: radial-gradient(1px 1px at 20px 30px, white, transparent),
-    radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.7), transparent),
-    radial-gradient(1px 1px at 50px 160px, rgba(255, 255, 255, 0.5), transparent),
-    radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.6), transparent),
-    radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.45), transparent),
-    radial-gradient(1px 1px at 160px 120px, white, transparent);
-  background-size: 200px 200px;
-  opacity: 0.35;
-  mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
+  background-image: radial-gradient(1px 1px at 10px 14px, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1px 1px at 72px 40px, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(1px 1px at 34px 88px, rgba(255, 255, 255, 0.28), transparent),
+    radial-gradient(1px 1px at 120px 64px, rgba(255, 255, 255, 0.22), transparent);
+  background-size: 140px 140px;
+  opacity: 0.22;
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 35%, black 0%, transparent 72%);
+}
+
+@layer components {
+  .luna-card {
+    @apply rounded-[1.35rem] border p-6 sm:p-7;
+    border-color: var(--border);
+    background: var(--surface);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 24px 48px -32px rgba(0, 0, 0, 0.55);
+  }
+
+  .luna-card-quiet {
+    @apply rounded-[1.35rem] border p-5 sm:p-6;
+    border-color: var(--border);
+    background: var(--surface-raised);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset;
+  }
+
+  .luna-overline {
+    @apply text-[11px] font-medium tracking-wide text-[var(--muted)];
+  }
+
+  .luna-input {
+    @apply mt-1.5 w-full rounded-2xl px-3.5 py-2.5 text-sm outline-none transition;
+    border: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.18);
+    color: var(--foreground);
+  }
+
+  .luna-input::placeholder {
+    color: rgba(255, 255, 255, 0.28);
+  }
+
+  .luna-input:focus {
+    border-color: var(--border-strong);
+    box-shadow: 0 0 0 3px var(--ring);
+  }
+
+  .luna-btn-primary {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium transition;
+    background: var(--accent);
+    color: var(--accent-foreground);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+  }
+
+  .luna-btn-primary:hover {
+    filter: brightness(1.06);
+  }
+
+  .luna-btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  .luna-btn-soft {
+    @apply inline-flex items-center justify-center rounded-full border px-5 py-2.5 text-sm font-medium transition;
+    border-color: var(--border-strong);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--foreground);
+  }
+
+  .luna-btn-soft:hover {
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  .luna-list-row {
+    @apply rounded-2xl border px-3.5 py-3;
+    border-color: var(--border);
+    background: rgba(0, 0, 0, 0.12);
+  }
 }

@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
+        canvas: "var(--canvas)",
         foreground: "var(--foreground)",
       },
       fontFamily: {
